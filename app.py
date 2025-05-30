@@ -1,4 +1,3 @@
-# app.py
 
 import streamlit as st
 from PIL import Image
@@ -37,38 +36,20 @@ elif option == "Use Coordinates":
         else:
             st.warning("Please enter your API key.")
 
-# Process Image
 if "image_path" in locals():
     
     image_array = preprocess_image(image_path)
     mask = predict_rooftop_area(image_array)
     area_estimate = round(mask.sum() * 0.35, 2)
     confidence = calculate_confidence(mask)
-    # st.write(f"🧠 Debug: Rooftop pixels = {mask.sum()}, Area estimate = {area_estimate} m²")
-
-
-    # # Show mask overlay
-    # original = np.array(image.resize((256, 256)))
-    # mask_rgb = np.stack([mask * 255, np.zeros_like(mask), np.zeros_like(mask)], axis=2).astype('uint8')  # red mask
-    # overlay = Image.fromarray(np.clip(original + mask_rgb, 0, 255).astype('uint8'))
-
-    # st.image(overlay, caption="Rooftop Mask Overlay", use_container_width=True)
-    # Convert PIL image to numpy
     image_np = np.array(image.resize((256, 256))).astype(np.uint8)
-
-    # Convert boolean mask to red overlay
     red_overlay = np.zeros_like(image_np)
     red_overlay[mask] = [255, 0, 0]  # red where mask is True
-
-    # Blend original image and red overlay
     blended = cv2.addWeighted(image_np, 0.7, red_overlay, 0.3, 0)
-
-    # Show in Streamlit
     st.image(blended, caption="Rooftop Mask Overlay", use_container_width=True)
 
     # Calculations
     st.subheader("📊 Estimated Solar Metrics")
-
     st.write(f"**Estimated Rooftop Area:** {area_estimate} m²")
     st.write(f"**Detection Confidence:** {confidence}")
     metrics = estimate_solar_metrics(area_estimate)
