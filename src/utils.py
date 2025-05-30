@@ -8,34 +8,23 @@ def preprocess_image(image_path):
     return image_array
 
 def estimate_solar_metrics(area_sq_m):
-    # Constants (can be adjusted)
-    panel_efficiency = 0.18  # 18%
-    solar_irradiation = 5    # kWh/m²/day
+    panel_efficiency = 0.18  
+    solar_irradiation = 5    
     days_per_year = 365
-    electricity_price = 0.1  # USD/kWh
+    electricity_price = 0.1  
     installation_cost_per_kw = 1250
-    #  Debug prints
-    print("⚙️ DEBUG VALUES:")
-    print(f"Area: {area_sq_m}")
-    print(f"Panel efficiency: {panel_efficiency}")
-    print(f"Irradiation: {solar_irradiation}")
     # 1. Capacity in kW
     capacity_kw = area_sq_m * panel_efficiency * solar_irradiation
-    print(f"Capacity (kW): {capacity_kw}")
-
+    # print(f"Capacity (kW): {capacity_kw}")
     # 2. Annual energy output in kWh
     annual_output_kwh = capacity_kw * days_per_year
-
     # 3. Installation cost
     installation_cost = capacity_kw * installation_cost_per_kw
-
     # 4. Annual savings
     annual_savings = annual_output_kwh * electricity_price
-
     # 5. 10-year ROI
     total_savings = annual_savings * 10
     roi_percent = ((total_savings - installation_cost) / installation_cost) * 100
-
     return {
         "capacity_kw": round(capacity_kw, 2),
         "annual_output_kwh": round(annual_output_kwh, 2),
