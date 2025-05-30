@@ -1,4 +1,4 @@
-# src/model.py
+
 
 import torch
 import torchvision.transforms as T
@@ -8,16 +8,10 @@ import numpy as np
 from torchvision.models.segmentation import deeplabv3_resnet50, DeepLabV3_ResNet50_Weights
 import cv2
 
-# load model with pretrained weights
 weights = DeepLabV3_ResNet50_Weights.DEFAULT
 model = deeplabv3_resnet50(weights=weights)
 model.eval()
 
-# # Load model
-# model = deeplabv3_resnet50(pretrained=True)
-# model.eval()
-
-# Image transform
 transform = T.Compose([
     T.Resize((256, 256)),
     T.ToTensor(),
@@ -25,16 +19,11 @@ transform = T.Compose([
 ])
 
 def predict_rooftop_area(image_array):
-    # Convert to grayscale (mean across RGB channels)
+   
     gray = np.mean(image_array, axis=2)
-
-    # Threshold (simulate rooftop brightness)
     mask = (gray > 0.4).astype(np.uint8)
-
-    # Morphological opening (remove small specks)
     kernel = np.ones((3, 3), np.uint8)
     cleaned_mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-
     return cleaned_mask.astype(bool)
 
 def calculate_confidence(mask):
