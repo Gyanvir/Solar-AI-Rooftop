@@ -2,6 +2,10 @@
 
 An AI-powered tool designed to analyze satellite imagery for rooftop solar potential, providing estimates on panel capacity, energy output, and return on investment (ROI) for locations in India.
 
+🚀 **Live Demo:**  
+👉 [Click here to try it on Hugging Face Spaces](https://huggingface.co/spaces/thegyanvirs/Solar-AI-Rooftop)
+
+---
 ---
 
 ## 📦 Project Setup Instructions
