@@ -2,7 +2,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 import os
-# import requests
+
 
 def generate_summary(area_sq_m, location, api_key):
     url = "https://openrouter.ai/api/v1/chat/completions"
