@@ -7,6 +7,13 @@ An AI-powered tool designed to analyze satellite imagery for rooftop solar poten
 
 ---
 ---
+## ✨ Features
+
+- Upload satellite image or enter coordinates
+- Rooftop detection using simulated brightness + contour extraction
+- Area, capacity, and ROI calculation
+- Optional GPT-based solar recommendation (via API)
+- Visual overlay with rooftop boundary outlines
 
 ## 📦 Project Setup Instructions
 
@@ -82,22 +89,6 @@ To use features like satellite image fetching (Google Maps API) and AI-generated
 
 You'll be prompted to enter these keys in the Streamlit UI when needed.  
 **No keys are stored or shared.**
-
-### Core Components
-
-* **Image Upload & Processing**: Users can upload satellite images or fetch them using latitude and longitude coordinates. The application processes these images to identify potential rooftop areas suitable for solar panel installation.
-
-* **Rooftop Segmentation**: Utilizes brightness thresholding to simulate rooftop detection. This method estimates the usable rooftop area for solar panels.
-
-* **Solar Metrics Calculation**:
-
-  * **Capacity (kW)**: Calculated based on the estimated rooftop area and panel efficiency.
-  * **Annual Output (kWh)**: Estimated using average solar insolation values.
-  * **Installation Cost (USD)**: Computed using standard cost per kW metrics.
-  * **Annual Savings (USD)**: Based on local electricity rates and estimated energy production.
-  * **ROI over 10 Years (%)**: Evaluates the financial return over a decade.
-
-* **AI-Generated Summary**: Optionally, the application can provide a textual summary of the analysis using GPT-based models via OpenRouter or OpenAI APIs.
 
 ---
 
