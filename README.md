@@ -69,6 +69,19 @@ Solar-AI-Rooftop/
     ├── model.py           # Contains model-related functions
     └── utils.py           # Utility functions for calculations
 ```
+## 🔑 API Key Setup
+
+To use features like satellite image fetching (Google Maps API) and AI-generated summaries (OpenAI or OpenRouter), you need to add your own API keys:
+
+1. **Google Maps API Key** – for downloading satellite images via coordinates  
+   Get it from: [https://console.cloud.google.com/apis](https://console.cloud.google.com/apis)
+
+2. **OpenAI or OpenRouter API Key** – for GPT-based recommendations  
+   - OpenAI: [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)  
+   - OpenRouter: [https://openrouter.ai/settings](https://openrouter.ai/settings)
+
+You'll be prompted to enter these keys in the Streamlit UI when needed.  
+**No keys are stored or shared.**
 
 ### Core Components
 
