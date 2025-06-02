@@ -38,15 +38,25 @@ elif option == "Use Coordinates":
 
 if "image_path" in locals():
     
-    image_array = preprocess_image(image_path)
-    mask = predict_rooftop_area(image_array)
-    area_estimate = round(mask.sum() * 0.35, 2)
-    confidence = calculate_confidence(mask)
-    image_np = np.array(image.resize((256, 256))).astype(np.uint8)
-    red_overlay = np.zeros_like(image_np)
-    red_overlay[mask] = [255, 0, 0]  # red where mask is True
-    blended = cv2.addWeighted(image_np, 0.7, red_overlay, 0.3, 0)
-    st.image(blended, caption="Rooftop Mask Overlay", use_container_width=True)
+    # image_array = preprocess_image(image_path)
+    # mask = predict_rooftop_area(image_array)
+    # area_estimate = round(mask.sum() * 0.35, 2)
+    # confidence = calculate_confidence(mask)
+    # image_np = np.array(image.resize((256, 256))).astype(np.uint8)
+    # red_overlay = np.zeros_like(image_np)
+    # red_overlay[mask] = [255, 0, 0]  # red where mask is True
+    # blended = cv2.addWeighted(image_np, 0.7, red_overlay, 0.3, 0)
+    # st.image(blended, caption="Rooftop Mask Overlay", use_container_width=True)
+    
+    # Convert mask to uint8 format
+    mask_uint8 = (mask * 255).astype(np.uint8)
+    # Find contours
+    contours, _ = cv2.findContours(mask_uint8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    # Draw contours on the original image
+    image_np = np.array(image.resize((256, 256))).copy()
+    cv2.drawContours(image_np, contours, -1, (255, 0, 0), 2)  # Blue lines    
+    # Display updated image with contours
+    st.image(image_np, caption="Detected Rooftop Boundaries", use_container_width=True)
 
     # Calculations
     st.subheader("📊 Estimated Solar Metrics")
